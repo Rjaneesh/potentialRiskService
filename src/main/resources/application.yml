@@ -1,0 +1,51 @@
+spring:
+  main:
+    allow-circular-references: true
+  profiles:
+    active: test 
+    mvc:
+      pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  jpa:  
+    show-sql: false
+    open-in-view: false
+    hibernate:  
+      ddl-auto: none
+    properties:
+      hibernate:
+        show-sql: false
+      
+  datasource:
+    username: test/bdp-smartnav-secret
+    hikari:
+      connection-timeout: 90000
+      leak-detection-threshold: 180000
+      minimum-idle: 3
+      maximum-pool-size: 25    
+        
+cloud:
+  aws:
+    region:
+      static: us-east-1
+      auto: false
+    #BDP_AWS_ENV
+    credentials:
+    secret-name: 'test/bdp-smartnav-secret'
+
+server:
+  port: 5000
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,application/json
+    
+logging:
+  file.name: /var/log/potential_risk_service.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    potentialRiskService: INFO
+    com.bdp.innovation.potentialRiskService.controller: INFO
+  group:
+     potentialRiskService: com.bdp.innovation.potentialRiskService.controller, package com.bdp.innovation.potentialRiskService.daoimpl, com.bdp.innovation.potentialRiskService.awsConfig, org.springframework.web, org.hibernate
+

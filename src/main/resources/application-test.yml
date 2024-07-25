@@ -1,0 +1,10 @@
+logging:
+        file:
+          name:  /var/log/potential_risk_service.log
+        pattern:
+          console: "%d %-5level %logger : %msg%n"
+          file: "%d %-5level [%thread] %logger : %msg%n"
+        level:
+          org.springframework.web: INFO
+          com.bdp.innovations.riskmonitor.controller: INFO
+          org.hibernate: ERROR

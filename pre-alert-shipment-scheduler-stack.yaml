@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Resources:
+  ShipmentSchedulerFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: "ShipmentScheduler"
+      Handler: "com.example.ShipmentScheduler::handleRequest"
+      Runtime: "java11"
+      CodeUri: "s3://your-s3-bucket/path/to/your/lambda/deployment/package.zip"
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ScheduledEvent:
+          Type: "Schedule"
+          Properties:
+            Schedule: "rate(1 hour)"
+            Name: "ShipmentSchedulerRule"  # Optional: Name for the CloudWatch Events rule
+            Description: "Triggers the ShipmentScheduler function every hour"  # Optional: Description for the rule

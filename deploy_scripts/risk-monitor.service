@@ -1,0 +1,17 @@
+[Unit]
+Description=Upstart for portalservice
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+LimitNOFILE=49152
+User=ec2-user
+ExecStart=/usr/bin/java -Xmx4096m -jar /home/ec2-user/riskmonitor/bdp.risk-monitor.service.jar
+StandardOutput=file:/var/log/bdp_risk_portal.log
+Type=simple
+SuccessExitStatus=143
+Restart=on-failure
+#RestartSec=120s
+
+[Install]
+WantedBy=multi-user.target

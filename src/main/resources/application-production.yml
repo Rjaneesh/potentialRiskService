@@ -1,0 +1,9 @@
+logging:
+      file:
+        name: /var/log/production_rmprofile_app.log
+      pattern:
+        file: "%d %-5level [%thread] %logger{0} : %msg%n"
+      level:
+        org.springframework.web: ERROR
+        com.bdp.innovations.riskmonitor.controller: ERROR
+        org.hibernate: ERROR

@@ -1,0 +1,7 @@
+logging:
+  pattern:
+    console: "%msg%n"
+  level:
+    org.springframework.web: INFO
+    com.bdp.innovation.potentialRiskService.controller: INFO
+    org.hibernate: INFO

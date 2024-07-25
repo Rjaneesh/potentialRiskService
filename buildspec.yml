@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    commands:
+      - echo In the pre_build phase...
+      - echo `java --version`
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn clean install -DskipTests
+
+  post_build:
+    commands:
+      - mv target/*.jar bdp.risk-monitor.service.jar
+      - ls -lrt target/
+      - echo Build Successful and uploading zip to s3 bucket
+      - zip -r risk-jar.zip bdp.risk-monitor.service.jar
+      # - aws s3 cp risk-jar.zip s3://risk-monitor/
+
+artifacts:
+  type: zip
+  files:
+    - bdp.risk-monitor.service.jar
+    - deploy_scripts/*
+    - appspec.yml
